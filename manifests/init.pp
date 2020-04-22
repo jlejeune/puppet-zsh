@@ -7,13 +7,20 @@ class zsh {
   # include ohmyzsh class using parameters defined in hiera
   include '::ohmyzsh'
 
-  # install powerlevel9k ohmyzsh theme for jlejeune user
+  # install powerlevel9k ohmyzsh theme for jlejeune and root users
   vcsrepo { '/home/jlejeune/.oh-my-zsh/custom/themes/powerlevel9k':
     ensure   => present,
     provider => git,
     source   => 'https://github.com/bhilburn/powerlevel9k.git',
     user     => 'jlejeune',
     require  => Ohmyzsh::Install['jlejeune'],
+  }
+  vcsrepo { '/root/.oh-my-zsh/custom/themes/powerlevel9k':
+    ensure   => present,
+    provider => git,
+    source   => 'https://github.com/bhilburn/powerlevel9k.git',
+    user     => 'root',
+    require  => Ohmyzsh::Install['root'],
   }
 
   # add custom zsh config files
